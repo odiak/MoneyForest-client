@@ -1,4 +1,5 @@
 export const AppActionTypes = {
+  CHANGE_ROUTE: '',
   INCREMENT: '',
   DECREMENT: '',
 };
