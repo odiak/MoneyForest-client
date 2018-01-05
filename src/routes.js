@@ -4,7 +4,7 @@ import {Route} from './data/Route';
 const routes = [
   ['home', '/'],
   ['login', '/login'],
-  ['register', '/register'],
+  ['registration', '/register'],
   ['categoryList', '/categories'],
 ];
 

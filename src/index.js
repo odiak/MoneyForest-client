@@ -13,6 +13,7 @@ import {history} from './history';
   });
 }
 history.listen((location, action) => {
+  console.log(location, action);
   AppActions.changeRoute(location.pathname, {
     search: location.search,
     hash: location.hash,

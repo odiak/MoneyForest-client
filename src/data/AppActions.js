@@ -1,7 +1,20 @@
 import {AppDispatcher} from './AppDispatcher';
 import {AppActionTypes} from './AppActionTypes';
+import {create as createAxios} from 'axios';
 import {history} from '../history';
 import {route} from '../routes';
+
+const axios = createAxios({
+  baseURL: '/api',
+});
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('MONEYFOREST_API_TOKEN');
+  if (token) {
+    config.headers['X-MoneyForest-Auth-Token'] = token;
+  }
+  return config;
+});
 
 function dispatch(type, payload) {
   AppDispatcher.dispatch({type, payload});
@@ -9,12 +22,25 @@ function dispatch(type, payload) {
 
 export const AppActions = {
   changeRoute(path, {search = '', hash = '', modifyHistory = true} = {}) {
+    const r = route(path, search, hash);
     if (modifyHistory) {
       history.push(path);
+      console.log(r.toJS());
     }
-    const r = route(path, search, hash);
-    console.log(r.toJS());
     dispatch(AppActionTypes.CHANGE_ROUTE, r);
+
+    if (r.name !== 'registration' && r.name !== 'login') {
+      axios
+        .get('/users/me')
+        .then((res) => {
+          console.log(res);
+          dispatch(AppActionTypes.SET_CURRENT_USER, res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          console.log(error.res);
+        });
+    }
   },
 
   increment() {
@@ -23,5 +49,50 @@ export const AppActions = {
 
   decrement() {
     dispatch(AppActionTypes.DECREMENT);
+  },
+
+  updateRegistrationUserName(value) {
+    dispatch(AppActionTypes.UPDATE_REGISTRATION_USER_NAME, value);
+  },
+  updateRegistrationEmail(value) {
+    dispatch(AppActionTypes.UPDATE_REGISTRATION_EMAIL, value);
+  },
+  updateRegistrationPassword(value) {
+    dispatch(AppActionTypes.UPDATE_REGISTRATION_PASSWORD, value);
+  },
+
+  register({userName, email, password}) {
+    axios
+      .post('/users', {name: userName, email, password})
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('MONEYFOREST_API_TOKEN', res.data.token);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response);
+      });
+  },
+
+  updateLoginEmail(value) {
+    dispatch(AppActionTypes.UPDATE_LOGIN_EMAIL, value);
+  },
+  updateLoginPassword(value) {
+    dispatch(AppActionTypes.UPDATE_LOGIN_PASSWORD, value);
+  },
+
+  login({email, password}) {
+    axios
+      .post('/users/login', {email, password})
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('MONEYFOREST_API_TOKEN', res.data.token);
+        dispatch(AppActionTypes.LOGIN_SUCCEEDED, res.data);
+        AppActions.changeRoute('/');
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response);
+      });
   },
 };
