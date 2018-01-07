@@ -1,7 +1,6 @@
 export const AppActionTypes = {
   INCREMENT: '',
   DECREMENT: '',
-
   UPDATE_REGISTRATION_USER_NAME: '',
   UPDATE_REGISTRATION_EMAIL: '',
   UPDATE_REGISTRATION_PASSWORD: '',
@@ -16,6 +15,12 @@ export const AppActionTypes = {
 
   SET_CURRENT_USER: '',
   UNSET_CURRENT_USER: '',
+
+  UPDATE_TRANSACTION_DRAFT: '',
+  RESET_TRANSACTION_DRAFT: '',
+
+  UPDATE_ACCOUNT_DRAFT: '',
+  ACCOUNTS_LOADED: '',
 };
 
 for (const key in AppActionTypes) {
