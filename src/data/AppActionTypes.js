@@ -1,5 +1,4 @@
 export const AppActionTypes = {
-  CHANGE_ROUTE: '',
   INCREMENT: '',
   DECREMENT: '',
 
@@ -16,6 +15,7 @@ export const AppActionTypes = {
   REGISTRATION_SUCCEEDED: '',
 
   SET_CURRENT_USER: '',
+  UNSET_CURRENT_USER: '',
 };
 
 for (const key in AppActionTypes) {

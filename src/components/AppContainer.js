@@ -2,9 +2,9 @@ import {Container} from 'flux/utils';
 import {App} from './App';
 import {AppDispatcher} from '../data/AppDispatcher';
 import {AppActions} from '../data/AppActions';
-import {RegistrationDraftStore} from '../data/RegistrationDraftStore';
-import {LoginDraftStore} from '../data/LoginDraftStore';
-import {CurrentUserStore} from '../data/CurrentUserStore';
+import {RegistrationDraftStore} from '../stores/RegistrationDraftStore';
+import {LoginDraftStore} from '../stores/LoginDraftStore';
+import {CurrentUserStore} from '../stores/CurrentUserStore';
 import {history} from '../history';
 
 const registrationDraftStore = new RegistrationDraftStore(AppDispatcher);

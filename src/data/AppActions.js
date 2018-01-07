@@ -19,24 +19,6 @@ function dispatch(type, payload) {
 }
 
 export const AppActions = {
-  changeRoute(path, {search = '', hash = '', modifyHistory = true} = {}) {
-    console.log('c');
-    // dispatch(AppActionTypes.CHANGE_ROUTE, r);
-
-    // if (r.name !== 'registration' && r.name !== 'login') {
-    //   axios
-    //     .get('/users/me')
-    //     .then((res) => {
-    //       console.log(res);
-    //       dispatch(AppActionTypes.SET_CURRENT_USER, res.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       console.log(error.res);
-    //     });
-    // }
-  },
-
   increment() {
     dispatch(AppActionTypes.INCREMENT);
   },
@@ -82,7 +64,6 @@ export const AppActions = {
         console.log(res);
         localStorage.setItem('MONEYFOREST_API_TOKEN', res.data.token);
         dispatch(AppActionTypes.LOGIN_SUCCEEDED, res.data);
-        AppActions.changeRoute('/');
       })
       .catch((error) => {
         console.log(error);
@@ -99,7 +80,8 @@ export const AppActions = {
       })
       .catch((error) => {
         console.log(error);
-        console.log(error.res);
+        console.log(error.response);
+        dispatch(AppActionTypes.UNSET_CURRENT_USER);
       });
   },
 };

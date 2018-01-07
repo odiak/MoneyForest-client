@@ -25,14 +25,20 @@ const RoutesWhenLoggedOut = (props) => (
 );
 
 export const App = (props) => {
-  const {history} = props;
+  const {history, currentUser} = props;
+
+  if (!currentUser.isLoaded) return null;
 
   return (
     <Router history={history}>
       <div>
         <Header {...props} />
 
-        {props.currentUser ? <RoutesWhenLoggedIn {...props} /> : <RoutesWhenLoggedOut {...props} />}
+        {currentUser.isPresent ? (
+          <RoutesWhenLoggedIn {...props} />
+        ) : (
+          <RoutesWhenLoggedOut {...props} />
+        )}
       </div>
     </Router>
   );
