@@ -1,8 +1,6 @@
 import {AppDispatcher} from './AppDispatcher';
 import {AppActionTypes} from './AppActionTypes';
 import {create as createAxios} from 'axios';
-import {history} from '../history';
-import {route} from '../routes';
 
 const axios = createAxios({
   baseURL: '/api',
@@ -22,25 +20,21 @@ function dispatch(type, payload) {
 
 export const AppActions = {
   changeRoute(path, {search = '', hash = '', modifyHistory = true} = {}) {
-    const r = route(path, search, hash);
-    if (modifyHistory) {
-      history.push(path);
-      console.log(r.toJS());
-    }
-    dispatch(AppActionTypes.CHANGE_ROUTE, r);
+    console.log('c');
+    // dispatch(AppActionTypes.CHANGE_ROUTE, r);
 
-    if (r.name !== 'registration' && r.name !== 'login') {
-      axios
-        .get('/users/me')
-        .then((res) => {
-          console.log(res);
-          dispatch(AppActionTypes.SET_CURRENT_USER, res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-          console.log(error.res);
-        });
-    }
+    // if (r.name !== 'registration' && r.name !== 'login') {
+    //   axios
+    //     .get('/users/me')
+    //     .then((res) => {
+    //       console.log(res);
+    //       dispatch(AppActionTypes.SET_CURRENT_USER, res.data);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //       console.log(error.res);
+    //     });
+    // }
   },
 
   increment() {
@@ -93,6 +87,19 @@ export const AppActions = {
       .catch((error) => {
         console.log(error);
         console.log(error.response);
+      });
+  },
+
+  loadCurrentUser() {
+    axios
+      .get('/users/me')
+      .then((res) => {
+        console.log(res);
+        dispatch(AppActionTypes.SET_CURRENT_USER, res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.res);
       });
   },
 };

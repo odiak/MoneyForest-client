@@ -14,7 +14,8 @@
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "prettier": "^1.9.2",
