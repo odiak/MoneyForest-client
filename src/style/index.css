@@ -1,0 +1,26 @@
+body {
+  font-family: sans-serif;
+}
+
+input[type='text'],
+input[type='number'],
+input[type='date'],
+textarea,
+select {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  padding: 3px;
+}
+
+input[type='date'] {
+  font-family: sans-serif;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  font-size: 1em;
+}

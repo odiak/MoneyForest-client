@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import './Header.css';
+import '../style/Header.css';
 
 const ItemsWhenLoggedIn = (props) => (
   <Fragment>
@@ -25,7 +25,9 @@ export const Header = (props) => {
 
   return (
     <div className="Header">
-      <h1>MoneyForest</h1>
+      <h1>
+        <Link to="/">MoneyForest</Link>
+      </h1>
       <div className="Header-navigation-items">
         {currentUser.isPresent ? (
           <ItemsWhenLoggedIn {...props} />

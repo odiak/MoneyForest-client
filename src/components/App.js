@@ -10,6 +10,8 @@ import {NewAccount} from './NewAccount';
 import {AccountList} from './AccountList';
 import {NotFound} from './NotFound';
 
+import '../style/App.css';
+
 function bindProps(Component, props) {
   return (p) => <Component {...props} {...p} />;
 }
@@ -41,7 +43,7 @@ export const App = (props) => {
 
   return (
     <Router history={history}>
-      <div>
+      <div className="App">
         <Header {...props} />
 
         {currentUser.isPresent ? (
