@@ -29,7 +29,7 @@ export const NewTransaction = (props) => (
           e.preventDefault();
           props.createNewTransaction(props.transactionDraft.toJS());
         }}
-        autocomplete="off"
+        autoComplete="off"
       >
         <FormGroup>
           <FormLabel>account</FormLabel>
