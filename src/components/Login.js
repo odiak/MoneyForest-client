@@ -1,34 +1,44 @@
 import * as React from 'react';
 
-export const Login = (props) => {
-  const {loginDraft, updateLoginEmail, updateLoginPassword, login} = props;
+import {FormGroup} from './FormGroup';
+import {FormLabel} from './FormLabel';
+import {FormContent} from './FormContent';
 
+export const Login = ({loginDraft, updateLoginDraft, login}) => {
   return (
     <div>
       <h2>Login</h2>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          login(loginDraft);
+          login();
         }}
       >
-        <div>
-          <label>email</label>
-          <input
-            type="text"
-            value={loginDraft.email}
-            onChange={(e) => updateLoginEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>password</label>
-          <input
-            type="password"
-            value={loginDraft.password}
-            onChange={(e) => updateLoginPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
+        <FormGroup>
+          <FormLabel>email</FormLabel>
+          <FormContent>
+            <input
+              type="text"
+              value={loginDraft.email}
+              onChange={(e) => updateLoginDraft('email', e.target.value)}
+            />
+          </FormContent>
+        </FormGroup>
+        <FormGroup>
+          <FormLabel>password</FormLabel>
+          <FormContent>
+            <input
+              type="password"
+              value={loginDraft.password}
+              onChange={(e) => updateLoginDraft('password', e.target.value)}
+            />
+          </FormContent>
+        </FormGroup>
+        <FormGroup>
+          <FormContent>
+            <button type="submit">login</button>
+          </FormContent>
+        </FormGroup>
       </form>
     </div>
   );

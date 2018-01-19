@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import '../style/Header.css';
 
 const ItemsWhenLoggedIn = (props) => (
@@ -18,7 +19,12 @@ const ItemsWhenLoggedOut = (props) => (
   </Fragment>
 );
 
-export const Header = (props) => {
+const stateToProps = (state, props) => ({
+  currentUser: state.currentUser,
+});
+const dispatcherToProps = (dispatch, props) => ({});
+
+export const Header = connect(stateToProps, dispatcherToProps)((props) => {
   const {currentUser} = props;
 
   if (!currentUser.isLoaded) return null;
@@ -37,4 +43,4 @@ export const Header = (props) => {
       </div>
     </div>
   );
-};
+});

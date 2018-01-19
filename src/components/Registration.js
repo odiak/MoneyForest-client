@@ -1,48 +1,54 @@
 import * as React from 'react';
 
-export const Registration = (props) => {
-  const {
-    registrationDraft,
-    updateRegistrationUserName,
-    updateRegistrationEmail,
-    updateRegistrationPassword,
-    register,
-  } = props;
+import {FormGroup} from './FormGroup';
+import {FormLabel} from './FormLabel';
+import {FormContent} from './FormContent';
 
+export const Registration = ({registrationDraft, updateRegistrationDraft, register}) => {
   return (
     <div>
       <h2>Register</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          register(registrationDraft);
+          register();
         }}
       >
-        <div>
-          <label>name</label>
-          <input
-            type="text"
-            value={registrationDraft.userName}
-            onChange={(e) => updateRegistrationUserName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>email</label>
-          <input
-            type="text"
-            value={registrationDraft.email}
-            onChange={(e) => updateRegistrationEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>password</label>
-          <input
-            type="password"
-            value={registrationDraft.password}
-            onChange={(e) => updateRegistrationPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">register</button>
+        <FormGroup>
+          <FormLabel>name</FormLabel>
+          <FormContent>
+            <input
+              type="text"
+              value={registrationDraft.userName}
+              onChange={(e) => updateRegistrationDraft('userName', e.target.value)}
+            />
+          </FormContent>
+        </FormGroup>
+        <FormGroup>
+          <FormLabel>email</FormLabel>
+          <FormContent>
+            <input
+              type="text"
+              value={registrationDraft.email}
+              onChange={(e) => updateRegistrationDraft('email', e.target.value)}
+            />
+          </FormContent>
+        </FormGroup>
+        <FormGroup>
+          <FormLabel>password</FormLabel>
+          <FormContent>
+            <input
+              type="password"
+              value={registrationDraft.password}
+              onChange={(e) => updateRegistrationDraft('password', e.target.value)}
+            />
+          </FormContent>
+        </FormGroup>
+        <FormGroup>
+          <FormContent>
+            <button type="submit">register</button>
+          </FormContent>
+        </FormGroup>
       </form>
     </div>
   );
